@@ -7,6 +7,7 @@ function App() {
     <>
       
      <h1>EcoSphere</h1>
+     <p>hello how r u</p>
     </>
   )
 }
