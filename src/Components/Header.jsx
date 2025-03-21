@@ -1,27 +1,68 @@
 import React from 'react';
 import {
-  MDBContainer,
-  MDBNavbar,
-  MDBNavbarBrand
-} from 'mdb-react-ui-kit';
+  AppBar,
+  Toolbar,
+  Container,
+  Typography,
+  Box,
+  Link,
+  Stack
+} from '@mui/material';
+import {
+  Home as HomeIcon,
+  ShoppingBag as ShoppingBagIcon,
+  Spa as SpaIcon
+} from '@mui/icons-material';
+
 function Header() {
   return (
-    <>
-    <MDBNavbar light bgColor='light'>
-        <MDBContainer fluid>
-          <MDBNavbarBrand href='#'>
-            <img
-              src='https://cdn.pixabay.com/photo/2023/03/13/20/13/button-7850698_1280.png'
-              height='50'
-              alt=''
-              loading='lazy'
+    <AppBar position="static" color="default" elevation={1} sx={{ bgcolor: 'white' }}>
+      <Container maxWidth="fluid">
+        <Toolbar disableGutters>
+          {/* Brand/Logo */}
+          <Link href="#" underline="none" sx={{ display: 'flex', alignItems: 'center' }}>
+            <Box
+              component="img"
+              src="https://cdn.pixabay.com/photo/2023/03/13/20/13/button-7850698_1280.png"
+              alt="EcoSphere Logo"
+              sx={{ height: 40, mr: 1 }}
+              loading="lazy"
             />
-            EcoSphere
-          </MDBNavbarBrand>
-        </MDBContainer>
-      </MDBNavbar>
-    </>
-  )
+            <Typography
+              variant="h6"
+              noWrap
+              fontWeight="bold"
+              color="text.primary"
+            >
+             <h3><b> EcoSphere</b></h3>
+            </Typography>
+          </Link>
+          
+          {/* Navigation Links */}
+          <Stack 
+            direction="row" 
+            spacing={3} 
+            sx={{ ml: 'auto' }}
+          >
+            <Link href="#" color="inherit" underline="none" sx={{ display: 'flex', alignItems: 'center' }}>
+              <HomeIcon fontSize="small" sx={{ mr: 0.5 }} />
+              <Typography component="span">Home</Typography>
+            </Link>
+            
+            <Link href="#" color="inherit" underline="none" sx={{ display: 'flex', alignItems: 'center' }}>
+              <ShoppingBagIcon fontSize="small" sx={{ mr: 0.5 }} />
+              <Typography component="span">Products</Typography>
+            </Link>
+            
+            <Link href="#" color="inherit" underline="none" sx={{ display: 'flex', alignItems: 'center' }}>
+              <SpaIcon fontSize="small" sx={{ mr: 0.5 }} />
+              <Typography component="span">Startups</Typography>
+            </Link>
+          </Stack>
+        </Toolbar>
+      </Container>
+    </AppBar>
+  );
 }
 
-export default Header
+export default Header;

@@ -1,128 +1,158 @@
 import React from 'react';
-import { MDBFooter, MDBContainer, MDBRow, MDBCol, MDBIcon } from 'mdb-react-ui-kit';
+import {
+  Box,
+  Container,
+  Grid,
+  Typography,
+  Link,
+  Divider,
+  IconButton,
+  Stack
+} from '@mui/material';
+import {
+  Facebook,
+  Twitter,
+  Instagram,
+  LinkedIn,
+  Phone,
+  Email,
+  Room,
+  Spa
+} from '@mui/icons-material';
+
 function Footer() {
   return (
-    <div>
-            <MDBFooter bgColor='light' className='text-center text-lg-start text-muted'>
-      <section className='d-flex justify-content-center justify-content-lg-between p-4 border-bottom'>
-        <div className='me-5 d-none d-lg-block'>
-          <span>Get connected with us on social networks:</span>
-        </div>
+    <Box component="footer" sx={{ bgcolor: 'white', color: 'text.secondary', boxShadow: 1 }}>
+      {/* Top social section */}
+      <Box sx={{ 
+        display: 'flex', 
+        justifyContent: 'space-between', 
+        p: 2, 
+        borderBottom: 1, 
+        borderColor: 'divider' 
+      }}>
+        <Box sx={{ display: { xs: 'none', lg: 'block' } }}>
+          <Typography fontWeight="600">Join our sustainable business network</Typography>
+        </Box>
 
-        <div>
-          <a href='' className='me-4 text-reset'>
-            <MDBIcon fab icon="facebook-f" />
-          </a>
-          <a href='' className='me-4 text-reset'>
-            <MDBIcon fab icon="twitter" />
-          </a>
-          <a href='' className='me-4 text-reset'>
-            <MDBIcon fab icon="google" />
-          </a>
-          <a href='' className='me-4 text-reset'>
-            <MDBIcon fab icon="instagram" />
-          </a>
-          <a href='' className='me-4 text-reset'>
-            <MDBIcon fab icon="linkedin" />
-          </a>
-          <a href='' className='me-4 text-reset'>
-            <MDBIcon fab icon="github" />
-          </a>
-        </div>
-      </section>
+        <Box className="social-links">
+          <IconButton href="" color="inherit" aria-label="Facebook">
+            <Facebook />
+          </IconButton>
+          <IconButton href="" color="inherit" aria-label="Twitter">
+            <Twitter />
+          </IconButton>
+          <IconButton href="" color="inherit" aria-label="Instagram">
+            <Instagram />
+          </IconButton>
+          <IconButton href="" color="inherit" aria-label="LinkedIn">
+            <LinkedIn />
+          </IconButton>
+        </Box>
+      </Box>
 
-      <section className=''>
-        <MDBContainer className='text-center text-md-start mt-5'>
-          <MDBRow className='mt-3'>
-            <MDBCol md="3" lg="4" xl="3" className='mx-auto mb-4'>
-              <h6 className='text-uppercase fw-bold mb-4'>
-                <MDBIcon icon="gem" className="me-3" />
-               EcoSphere
-              </h6>
-              <p>
-                Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit amet,
-                consectetur adipisicing elit.
-              </p>
-            </MDBCol>
+      {/* Main content section */}
+      <Container sx={{ py: 4 }}>
+        <Grid container spacing={4}>
+          {/* About column */}
+          <Grid item xs={12} md={3} lg={4} xl={3}>
+            <Typography variant="h6" sx={{ textTransform: 'uppercase', fontWeight: 'bold', mb: 2, display: 'flex', alignItems: 'center' }}>
+              <Spa sx={{ mr: 1 }} />
+              EcoSphere
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              EcoSphere is a premium marketplace connecting businesses with sustainable packaging solutions. 
+              We facilitate partnerships between eco-conscious brands and verified sustainable suppliers.
+            </Typography>
+          </Grid>
 
-            <MDBCol md="2" lg="2" xl="2" className='mx-auto mb-4'>
-              <h6 className='text-uppercase fw-bold mb-4'>Products</h6>
-              <p>
-                <a href='#!' className='text-reset'>
-                  Angular
-                </a>
-              </p>
-              <p>
-                <a href='#!' className='text-reset'>
-                  React
-                </a>
-              </p>
-              <p>
-                <a href='#!' className='text-reset'>
-                  Vue
-                </a>
-              </p>
-              <p>
-                <a href='#!' className='text-reset'>
-                  Laravel
-                </a>
-              </p>
-            </MDBCol>
+          {/* Solutions column */}
+          <Grid item xs={12} md={2} lg={2} xl={2}>
+            <Typography variant="h6" sx={{ textTransform: 'uppercase', fontWeight: 'bold', mb: 2 }}>
+              Solutions
+            </Typography>
+            <Typography variant="body2" paragraph>
+              <Link href="#" underline="none" color="inherit">
+                Retail Packaging
+              </Link>
+            </Typography>
+            <Typography variant="body2" paragraph>
+              <Link href="#" underline="none" color="inherit">
+                Corporate Gifts
+              </Link>
+            </Typography>
+            <Typography variant="body2" paragraph>
+              <Link href="#" underline="none" color="inherit">
+                Food Service
+              </Link>
+            </Typography>
+            <Typography variant="body2" paragraph>
+              <Link href="#" underline="none" color="inherit">
+                Custom Branding
+              </Link>
+            </Typography>
+          </Grid>
 
-            <MDBCol md="3" lg="2" xl="2" className='mx-auto mb-4'>
-              <h6 className='text-uppercase fw-bold mb-4'>Useful links</h6>
-              <p>
-                <a href='#!' className='text-reset'>
-                  Pricing
-                </a>
-              </p>
-              <p>
-                <a href='#!' className='text-reset'>
-                  Settings
-                </a>
-              </p>
-              <p>
-                <a href='#!' className='text-reset'>
-                  Orders
-                </a>
-              </p>
-              <p>
-                <a href='#!' className='text-reset'>
-                  Help
-                </a>
-              </p>
-            </MDBCol>
+          {/* Business column */}
+          <Grid item xs={12} md={2} lg={2} xl={2}>
+            <Typography variant="h6" sx={{ textTransform: 'uppercase', fontWeight: 'bold', mb: 2 }}>
+              Business
+            </Typography>
+            <Typography variant="body2" paragraph>
+              <Link href="#" underline="none" color="inherit">
+                Become a Supplier
+              </Link>
+            </Typography>
+            <Typography variant="body2" paragraph>
+              <Link href="#" underline="none" color="inherit">
+                Partner Portal
+              </Link>
+            </Typography>
+            <Typography variant="body2" paragraph>
+              <Link href="#" underline="none" color="inherit">
+                Sustainability Standards
+              </Link>
+            </Typography>
+            <Typography variant="body2" paragraph>
+              <Link href="#" underline="none" color="inherit">
+                Enterprise Solutions
+              </Link>
+            </Typography>
+          </Grid>
 
-            <MDBCol md="4" lg="3" xl="3" className='mx-auto mb-md-0 mb-4'>
-              <h6 className='text-uppercase fw-bold mb-4'>Contact</h6>
-              <p>
-                <MDBIcon icon="home" className="me-2" />
-                New York, NY 10012, US
-              </p>
-              <p>
-                <MDBIcon icon="envelope" className="me-3" />
-                info@example.com
-              </p>
-              <p>
-                <MDBIcon icon="phone" className="me-3" /> + 01 234 567 88
-              </p>
-              <p>
-                <MDBIcon icon="print" className="me-3" /> + 01 234 567 89
-              </p>
-            </MDBCol>
-          </MDBRow>
-        </MDBContainer>
-      </section>
+          {/* Contact column */}
+          <Grid item xs={12} md={3} lg={3} xl={3}>
+            <Typography variant="h6" sx={{ textTransform: 'uppercase', fontWeight: 'bold', mb: 2 }}>
+              Contact
+            </Typography>
+            <Typography variant="body2" paragraph sx={{ display: 'flex', alignItems: 'start' }}>
+              <Room sx={{ mr: 1, fontSize: 'small', mt: 0.5 }} />
+              <Box component="span">
+                One Sustainable Plaza, Suite 200
+                <br />San Francisco, CA 94105
+              </Box>
+            </Typography>
+            <Typography variant="body2" paragraph sx={{ display: 'flex', alignItems: 'center' }}>
+              <Email sx={{ mr: 1, fontSize: 'small' }} />
+              contact@ecosphere.com
+            </Typography>
+            <Typography variant="body2" paragraph sx={{ display: 'flex', alignItems: 'center' }}>
+              <Phone sx={{ mr: 1, fontSize: 'small' }} />
+              +1 (800) 555-0123
+            </Typography>
+          </Grid>
+        </Grid>
+      </Container>
 
-      <div className='text-center p-4' style={{ backgroundColor: 'rgba(0, 0, 0, 0.05)' }}>
-        © 2021 Copyright:
-        <a className='text-reset fw-bold' href='https://mdbootstrap.com/'>
-          EcoSphere.com
-        </a>
-      </div>
-    </MDBFooter>
-    </div>
-  )
+
+      {/* Copyright section */}
+      <Box sx={{ textAlign: 'center', py: 2, bgcolor: 'rgba(0, 0, 0, 0.025)' }}>
+        <Typography variant="caption">
+          © {new Date().getFullYear()} EcoSphere Inc. All rights reserved.
+        </Typography>
+      </Box>
+    </Box>
+  );
 }
 
-export default Footer
+export default Footer;
