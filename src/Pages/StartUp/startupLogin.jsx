@@ -1,7 +1,9 @@
 import React from 'react'
 
-export default function startupLogin() {
+function StartupLogin() {
   return (
     <div>startupLogin</div>
   )
 }
+
+export default StartupLogin

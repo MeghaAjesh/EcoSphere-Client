@@ -18,6 +18,7 @@ import NatureIcon from '@mui/icons-material/Nature';
 import Recycling from '@mui/icons-material/Recycling';
 import ShoppingCart from '@mui/icons-material/ShoppingCart';
 import ecospherebag from "../assets/ecospherebag.jpg";
+import { Link } from 'react-router-dom';
 
 function HomePage() {
   return (
@@ -220,7 +221,8 @@ function HomePage() {
                   <Typography variant="body2" color="textSecondary" sx={{ mb: 2, textAlign: 'center' }}>
                     Manage products, vendors, and platform settings
                   </Typography>
-                  <Button 
+              <Link to='/admin-login'>
+              <Button 
                     variant="contained" 
                     color="primary" 
                     fullWidth
@@ -228,6 +230,7 @@ function HomePage() {
                   >
                     Admin Login
                   </Button>
+              </Link>
                 </CardContent>
               </Card>
             </Grid>
