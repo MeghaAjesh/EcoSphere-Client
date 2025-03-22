@@ -1,30 +1,31 @@
-import React, { useState } from "react";
-import { 
-  Container, 
-  TextField, 
-  Button, 
-  Typography, 
-  Box, 
-  Grid, 
-  InputAdornment, 
-  FormHelperText,
-  IconButton,
+import {
+  Container,
+  TextField,
+  Button,
+  Typography,
+  Box,
+  Grid,
   Paper,
+  InputAdornment,
+  IconButton,
   Divider,
-  Link
+  Alert,
+  Snackbar,
 } from "@mui/material";
-import { 
-  Email as EmailIcon, 
-  Business as BusinessIcon, 
-  Phone as PhoneIcon, 
-  Visibility as VisibilityIcon, 
-  VisibilityOff as VisibilityOffIcon,
-  LockOutlined as LockIcon 
+import { useState } from "react";
+import {
+  Email,
+  Person,
+  Phone,
+  Visibility,
+  VisibilityOff,
+  LockOutlined,
 } from "@mui/icons-material";
+import { Link } from "react-router-dom";
 
-const StartupRegister = () => {
+const UserRegister = () => {
   const [formData, setFormData] = useState({
-    startupName: "",
+    fullName: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -34,105 +35,131 @@ const StartupRegister = () => {
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-
-  const validateForm = () => {
-    const newErrors = {};
-    
-    // Startup name validation
-    if (formData.startupName.trim().length < 2) {
-      newErrors.startupName = "Startup name must be at least 2 characters";
-    }
-    
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.email)) {
-      newErrors.email = "Please enter a valid email address";
-    }
-    
-    // Password validation
-    if (formData.password.length < 8) {
-      newErrors.password = "Password must be at least 8 characters";
-    } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(formData.password)) {
-      newErrors.password = "Password must include uppercase, lowercase, and numbers";
-    }
-    
-    // Confirm password validation
-    if (formData.password !== formData.confirmPassword) {
-      newErrors.confirmPassword = "Passwords do not match";
-    }
-    
-    // Contact validation
-    const phoneRegex = /^\+?[0-9]{10,15}$/;
-    if (!phoneRegex.test(formData.contact)) {
-      newErrors.contact = "Please enter a valid contact number";
-    }
-    
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+  const [notification, setNotification] = useState({
+    open: false,
+    message: "",
+    severity: "success",
+  });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-    
+
     // Clear error when user types
     if (errors[name]) {
       setErrors({ ...errors, [name]: "" });
     }
   };
 
-  const handleSubmit = (e) => {
+  const validateForm = () => {
+    const newErrors = {};
+
+    // Full Name validation
+    if (formData.fullName.trim().length < 3) {
+      newErrors.fullName = "Full name must be at least 3 characters";
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      newErrors.email = "Please enter a valid email address";
+    }
+
+    // Password validation
+    if (formData.password.length < 8) {
+      newErrors.password = "Password must be at least 8 characters";
+    }
+
+    // Confirm password validation
+    if (formData.password !== formData.confirmPassword) {
+      newErrors.confirmPassword = "Passwords do not match";
+    }
+
+    // Contact validation
+    const phoneRegex = /^\+?[0-9]{10,15}$/;
+    if (!phoneRegex.test(formData.contact)) {
+      newErrors.contact = "Please enter a valid contact number";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  const handleRegister = (e) => {
     e.preventDefault();
+
     if (validateForm()) {
-      console.log("Startup Registration Data:", formData);
+      console.log("User Registered:", formData);
       // Add backend API call for registration here
+
+      setNotification({
+        open: true,
+        message: "Registration successful! Redirecting...",
+        severity: "success",
+      });
+
+      // Reset form after successful submission
+      setFormData({
+        fullName: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        contact: "",
+      });
     }
   };
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
-
-  const toggleConfirmPasswordVisibility = () => {
-    setShowConfirmPassword(!showConfirmPassword);
+  const handleCloseNotification = () => {
+    setNotification({ ...notification, open: false });
   };
 
   return (
     <Container maxWidth="md">
-      <Paper elevation={4} sx={{ mt: 5, mb: 5, borderRadius: 2, overflow: "hidden" }}>
-        <Box sx={{ bgcolor: "success.main", py: 3, px: 2 }}>
-          <Typography variant="h4" fontWeight="bold" align="center" color="white">
-            Startup Registration
+      <Paper
+        elevation={4}
+        sx={{ mt: 5, mb: 5, borderRadius: 2, overflow: "hidden" }}
+      >
+        <Box sx={{ bgcolor: "success.main", p: 2, color: "white" }}>
+          <Typography variant="h5" fontWeight="500" align="center">
+            Create Your Account
           </Typography>
         </Box>
-        
+
         <Box sx={{ p: 4 }}>
-          <Typography variant="body1" color="text.secondary" mb={3} align="center">
-          Create your startup account to sell eco-friendly bags and grow your business 🌿          </Typography>
-          
-          <form onSubmit={handleSubmit}>
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            paragraph
+            align="center"
+          >
+            Join EcoSphere! Sign up to shop eco-friendly bags.{" "}
+          </Typography>
+
+          <Divider sx={{ mb: 3 }} />
+
+          <form onSubmit={handleRegister}>
             <Grid container spacing={3}>
               <Grid item xs={12}>
                 <TextField
-                  label="Startup Name"
-                  name="startupName"
+                  label="Full Name"
+                  name="fullName"
                   variant="outlined"
                   fullWidth
                   required
-                  value={formData.startupName}
+                  value={formData.fullName}
                   onChange={handleChange}
-                  error={!!errors.startupName}
-                  helperText={errors.startupName}
+                  error={Boolean(errors.fullName)}
+                  helperText={errors.fullName}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        <BusinessIcon color="success" />
+                        <Person color="success" />
                       </InputAdornment>
                     ),
                   }}
                 />
               </Grid>
-              
+
               <Grid item xs={12}>
                 <TextField
                   label="Email Address"
@@ -143,18 +170,18 @@ const StartupRegister = () => {
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  error={!!errors.email}
+                  error={Boolean(errors.email)}
                   helperText={errors.email}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        <EmailIcon color="success" />
+                        <Email color="success" />
                       </InputAdornment>
                     ),
                   }}
                 />
               </Grid>
-              
+
               <Grid item xs={12}>
                 <TextField
                   label="Password"
@@ -165,28 +192,30 @@ const StartupRegister = () => {
                   required
                   value={formData.password}
                   onChange={handleChange}
-                  error={!!errors.password}
-                  helperText={errors.password}
+                  error={Boolean(errors.password)}
+                  helperText={
+                    errors.password || "Password must be at least 8 characters"
+                  }
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        <LockIcon color="success" />
+                        <LockOutlined color="success" />
                       </InputAdornment>
                     ),
                     endAdornment: (
                       <InputAdornment position="end">
                         <IconButton
-                          onClick={togglePasswordVisibility}
+                          onClick={() => setShowPassword(!showPassword)}
                           edge="end"
                         >
-                          {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                          {showPassword ? <VisibilityOff /> : <Visibility />}
                         </IconButton>
                       </InputAdornment>
                     ),
                   }}
                 />
               </Grid>
-              
+
               <Grid item xs={12}>
                 <TextField
                   label="Confirm Password"
@@ -197,28 +226,34 @@ const StartupRegister = () => {
                   required
                   value={formData.confirmPassword}
                   onChange={handleChange}
-                  error={!!errors.confirmPassword}
+                  error={Boolean(errors.confirmPassword)}
                   helperText={errors.confirmPassword}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        <LockIcon color="success" />
+                        <LockOutlined color="success" />
                       </InputAdornment>
                     ),
                     endAdornment: (
                       <InputAdornment position="end">
                         <IconButton
-                          onClick={toggleConfirmPasswordVisibility}
+                          onClick={() =>
+                            setShowConfirmPassword(!showConfirmPassword)
+                          }
                           edge="end"
                         >
-                          {showConfirmPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                          {showConfirmPassword ? (
+                            <VisibilityOff />
+                          ) : (
+                            <Visibility />
+                          )}
                         </IconButton>
                       </InputAdornment>
                     ),
                   }}
                 />
               </Grid>
-              
+
               <Grid item xs={12}>
                 <TextField
                   label="Contact Number"
@@ -229,64 +264,67 @@ const StartupRegister = () => {
                   required
                   value={formData.contact}
                   onChange={handleChange}
-                  error={!!errors.contact}
+                  error={Boolean(errors.contact)}
                   helperText={errors.contact}
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        <PhoneIcon color="success" />
+                        <Phone color="success" />
                       </InputAdornment>
                     ),
                   }}
                 />
-                <FormHelperText>Include country code (e.g., +1 for US)</FormHelperText>
               </Grid>
-              
-              <Grid item xs={12}>
-                <Button 
-                  type="submit" 
-                  variant="contained" 
-                  color="success" 
-                  fullWidth 
+
+              <Grid item xs={12} sx={{ mt: 2 }}>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="success"
+                  fullWidth
                   size="large"
-                  sx={{ 
-                    mt: 2, 
-                    py: 1.5,
-                    fontWeight: "bold",
-                    textTransform: "none",
-                    fontSize: "1rem"
-                  }}
+                  sx={{ py: 1.5, textTransform: "none", fontWeight: 600 }}
                 >
                   Create Account
                 </Button>
               </Grid>
+
+              <Grid item xs={12}>
+                <Box textAlign="center" mt={1}>
+                  <Typography variant="body2" color="text.secondary">
+                    Already have an account?
+                    <Link to="/user-login">
+                      <Button
+                        color="primary"
+                        sx={{ textTransform: "none", fontWeight: 600 }}
+                      >
+                        Sign In
+                      </Button>
+                    </Link>
+                  </Typography>
+                </Box>
+              </Grid>
             </Grid>
           </form>
-          
-          <Divider sx={{ my: 3 }}>
-            <Typography variant="body2" color="text.secondary">
-              Already registered?
-            </Typography>
-          </Divider>
-          
-          <Box textAlign="center">
-            <Link href="/startup-login" underline="none">
-              <Button 
-                variant="contained" 
-                color="success"
-                sx={{
-                  textTransform: "none",
-                  fontWeight: "medium"
-                }}
-              >
-                Sign In to Your Account
-              </Button>
-            </Link>
-          </Box>
         </Box>
       </Paper>
+
+      <Snackbar
+        open={notification.open}
+        autoHideDuration={6000}
+        onClose={handleCloseNotification}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+      >
+        <Alert
+          onClose={handleCloseNotification}
+          severity={notification.severity}
+          sx={{ width: "100%" }}
+        >
+          {notification.message}
+        </Alert>
+      </Snackbar>
     </Container>
   );
 };
 
-export default StartupRegister;
+export default UserRegister;

@@ -4,9 +4,11 @@ import './App.css'
 import Home from './Pages/Home'
 import Header from './Components/Header'
 import Footer from './Components/Footer'
-import AdminLogin from './Pages/Admin/adminLogin'
+import AdminLogin from './Pages/Admin/AdminLogin'
 import StartupRegister from './Pages/StartUp/StartUpRegister'
-import startuplogin from './Pages/StartUp/startupLogin'
+import StartupLogin from './Pages/StartUp/StartupLogin'
+import UserRegister from './Pages/User/UserRegister'
+import UserLogin from './Pages/User/UserLogin'
 
 function App() {
 
@@ -17,7 +19,9 @@ function App() {
    <Route path='/' element={<Home/>}/>
    <Route path='/admin-login' element={<AdminLogin/>}/>
    <Route path='/startup-register' element={<StartupRegister/>}/>
-   <Route path='/startup-login' element={<startupLogin/>} />
+   <Route path='/startup-login' element={<StartupLogin/>} />
+   <Route path='/user-register' element={<UserRegister/>}/>
+   <Route path='/user-login' element={<UserLogin/>}/>
   </Routes>
   <Footer/>
     </>

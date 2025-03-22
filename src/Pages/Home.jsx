@@ -251,19 +251,21 @@ function HomePage() {
                 }}>
                   <PersonOutline sx={{ fontSize: 48, color: '#9c27b0', mb: 2 }} />
                   <Typography variant="h6" fontWeight="bold" gutterBottom>
-                    Customer Portal
+                   User Portal
                   </Typography>
                   <Typography variant="body2" color="textSecondary" sx={{ mb: 2, textAlign: 'center' }}>
                     Browse, purchase, and track your eco-friendly bags
                   </Typography>
+                  <Link to='/user-login'>
                   <Button 
                     variant="contained" 
                     color="secondary" 
                     fullWidth
                     sx={{ mt: 'auto', borderRadius: 2 }}
                   >
-                    Customer Login
+                   User Login
                   </Button>
+                  </Link>
                 </CardContent>
               </Card>
             </Grid>
@@ -289,7 +291,8 @@ function HomePage() {
                   <Typography variant="body2" color="textSecondary" sx={{ mb: 2, textAlign: 'center' }}>
                     List your products and manage your inventory
                   </Typography>
-                  <Button 
+                 <Link to='/startup-login'>
+                 <Button 
                     variant="contained" 
                     sx={{ 
                       bgcolor: '#4caf50', 
@@ -302,6 +305,7 @@ function HomePage() {
                   >
                     Startup Login
                   </Button>
+                 </Link>
                 </CardContent>
               </Card>
             </Grid>
