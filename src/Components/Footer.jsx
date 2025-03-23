@@ -20,9 +20,17 @@ import {
   Spa
 } from '@mui/icons-material';
 
-function Footer() {
+function Footer({ isAdminDashboard }) {
   return (
-    <Box component="footer" sx={{ bgcolor: 'white', color: 'text.secondary', boxShadow: 1 }}>
+    <Box 
+      component="footer" 
+      sx={{ 
+        bgcolor: 'white', 
+        color: 'text.secondary', 
+        boxShadow: 1,
+        paddingLeft: isAdminDashboard ? '240px' : '0', // Conditionally add padding
+      }}
+    >
       {/* Top social section */}
       <Box sx={{ 
         display: 'flex', 
@@ -143,7 +151,6 @@ function Footer() {
           </Grid>
         </Grid>
       </Container>
-
 
       {/* Copyright section */}
       <Box sx={{ textAlign: 'center', py: 2, bgcolor: 'rgba(0, 0, 0, 0.025)' }}>

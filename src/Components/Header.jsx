@@ -5,7 +5,7 @@ import {
   Container,
   Typography,
   Box,
-  Link as MuiLink, // ✅ Renamed MUI Link to avoid conflict
+  Link as MuiLink,
   Stack
 } from '@mui/material';
 import {
@@ -13,14 +13,22 @@ import {
   ShoppingBag as ShoppingBagIcon,
   Spa as SpaIcon
 } from '@mui/icons-material';
-import { Link } from 'react-router-dom'; // ✅ React Router Link
+import { Link } from 'react-router-dom';
 
-function Header() {
+function Header({ isAdminDashboard }) {
   return (
-    <AppBar position="static" color="default" elevation={1} sx={{ bgcolor: 'white' }}>
+    <AppBar 
+      position="static" 
+      color="default" 
+      elevation={1} 
+      sx={{ 
+        bgcolor: 'white',
+        paddingLeft: isAdminDashboard ? '240px' : '0', // Conditionally add padding
+      }}
+    >
       <Container maxWidth="fluid">
-      <Toolbar sx={{ minHeight: 56, px: 2 }} disableGutters>
-      {/* Brand/Logo */}
+        <Toolbar sx={{ minHeight: 56, px: 2 }} disableGutters>
+          {/* Brand/Logo */}
           <MuiLink href="#" underline="none" sx={{ display: 'flex', alignItems: 'center' }}>
             <Box
               component="img"

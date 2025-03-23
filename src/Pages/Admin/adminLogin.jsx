@@ -14,7 +14,7 @@ import {
   Grid,
 } from "@mui/material";
 import { Email, Lock, Visibility, VisibilityOff } from "@mui/icons-material";
-
+import { Link as RouterLink } from "react-router-dom"; // ✅ React Router Link
 const AdminLogin = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
@@ -178,25 +178,29 @@ const AdminLogin = () => {
                   Forgot password?
                 </Link>
               </Box>
-
-              <Button
-                type="submit"
-                variant="contained"
-                fullWidth
-                size="large"
-                sx={{
-                  mt: 2,
-                  mb: 4,
-                  py: 1.5,
-                  backgroundColor: "#2e7d32",
-                  "&:hover": {
-                    backgroundColor: "#1b5e20",
-                  },
-                  fontWeight: 500,
-                }}
+              <RouterLink
+                to="/admin-dashboard"
+                style={{ textDecoration: "none", width: "100%" }}
               >
-                Sign In
-              </Button>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  fullWidth
+                  size="large"
+                  sx={{
+                    mt: 2,
+                    mb: 4,
+                    py: 1.5,
+                    backgroundColor: "#2e7d32",
+                    "&:hover": {
+                      backgroundColor: "#1b5e20",
+                    },
+                    fontWeight: 500,
+                  }}
+                >
+                  Sign In
+                </Button>
+              </RouterLink>
 
               <Typography variant="body2" color="text.secondary" align="center">
                 For admin access issues, please contact{" "}
