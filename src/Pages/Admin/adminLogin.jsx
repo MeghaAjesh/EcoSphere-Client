@@ -14,12 +14,14 @@ import {
   Grid,
 } from "@mui/material";
 import { Email, Lock, Visibility, VisibilityOff } from "@mui/icons-material";
-import { Link as RouterLink } from "react-router-dom"; // ✅ React Router Link
+import { useNavigate } from "react-router-dom"; // ✅ Use navigate instead of RouterLink
+
 const AdminLogin = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate(); // ✅ Use navigate function for redirection
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -29,11 +31,8 @@ const AdminLogin = () => {
       return;
     }
 
-    // Here you would typically handle authentication
-    console.log("Login attempt with:", email);
-
-    // Clear form for security after submission attempt
-    // setPassword('');
+    // ✅ If validation passes, navigate to the Admin Dashboard
+    navigate("/admin-dashboard");
   };
 
   return (
@@ -63,7 +62,7 @@ const AdminLogin = () => {
                 height: "100%",
               }}
             >
-              {/* Logo Placeholder - Replace with actual logo */}
+              {/* Logo Placeholder */}
               <Box
                 sx={{
                   mb: 3,
@@ -77,24 +76,13 @@ const AdminLogin = () => {
                 <Typography
                   variant="h4"
                   component="h1"
-                  sx={{
-                    fontWeight: 600,
-                    color: "#2e7d32",
-                  }}
+                  sx={{ fontWeight: 600, color: "#2e7d32" }}
                 >
                   Ecosphere
                 </Typography>
               </Box>
 
-              <Typography
-                variant="h5"
-                component="h2"
-                sx={{
-                  mb: 4,
-                  fontWeight: 500,
-                  color: "#424242",
-                }}
-              >
+              <Typography variant="h5" component="h2" sx={{ mb: 4, fontWeight: 500, color: "#424242" }}>
                 Admin Portal
               </Typography>
 
@@ -105,11 +93,7 @@ const AdminLogin = () => {
                   onClose={() => setError("")}
                   anchorOrigin={{ vertical: "top", horizontal: "center" }}
                 >
-                  <Alert
-                    onClose={() => setError("")}
-                    severity="error"
-                    sx={{ width: "100%" }}
-                  >
+                  <Alert onClose={() => setError("")} severity="error" sx={{ width: "100%" }}>
                     {error}
                   </Alert>
                 </Snackbar>
@@ -165,49 +149,33 @@ const AdminLogin = () => {
                 sx={{ mb: 1 }}
               />
 
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  width: "100%",
-                  mt: 1,
-                  mb: 3,
-                }}
-              >
+              <Box sx={{ display: "flex", justifyContent: "flex-end", width: "100%", mt: 1, mb: 3 }}>
                 <Link href="#" variant="body2" sx={{ color: "#2e7d32" }}>
                   Forgot password?
                 </Link>
               </Box>
-              <RouterLink
-                to="/admin-dashboard"
-                style={{ textDecoration: "none", width: "100%" }}
+
+              {/* ✅ Removed RouterLink and added onClick to handle validation */}
+              <Button
+                type="submit"
+                variant="contained"
+                fullWidth
+                size="large"
+                sx={{
+                  mt: 2,
+                  mb: 4,
+                  py: 1.5,
+                  backgroundColor: "#2e7d32",
+                  "&:hover": { backgroundColor: "#1b5e20" },
+                  fontWeight: 500,
+                }}
               >
-                <Button
-                  type="submit"
-                  variant="contained"
-                  fullWidth
-                  size="large"
-                  sx={{
-                    mt: 2,
-                    mb: 4,
-                    py: 1.5,
-                    backgroundColor: "#2e7d32",
-                    "&:hover": {
-                      backgroundColor: "#1b5e20",
-                    },
-                    fontWeight: 500,
-                  }}
-                >
-                  Sign In
-                </Button>
-              </RouterLink>
+                Sign In
+              </Button>
 
               <Typography variant="body2" color="text.secondary" align="center">
                 For admin access issues, please contact{" "}
-                <Link
-                  href="mailto:support@ecosphere.com"
-                  sx={{ color: "#2e7d32" }}
-                >
+                <Link href="mailto:support@ecosphere.com" sx={{ color: "#2e7d32" }}>
                   support@ecosphere.com
                 </Link>
               </Typography>
@@ -227,50 +195,17 @@ const AdminLogin = () => {
               minHeight: { xs: "300px", md: "600px" },
             }}
           >
-            {/* Replace with your actual image */}
-            <Box
-              sx={{
-                p: 4,
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                justifyContent: "center",
-                height: "100%",
-                width: "100%",
-              }}
-            >
-              {/* Placeholder for image - Replace with your actual image component */}
-              <Box
-                sx={{
-                  width: "100%",
-                  height: "70%",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  mb: 3,
-                }}
-              >
+            {/* Placeholder for image */}
+            <Box sx={{ p: 4, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", height: "100%", width: "100%" }}>
+              <Box sx={{ width: "100%", height: "70%", display: "flex", alignItems: "center", justifyContent: "center", mb: 3 }}>
                 <img
                   src="https://img.freepik.com/free-vector/mobile-login-concept-illustration_114360-135.jpg?t=st=1742617865~exp=1742621465~hmac=837dafe1c5957863b75e720ced9ff8933739d597234cfd77a62f6c72874c0a99&w=826"
                   alt="Ecosphere sustainable packaging"
-                  style={{
-                    maxWidth: "100%",
-                    maxHeight: "100%",
-                    objectFit: "contain",
-                    borderRadius: "8px",
-                  }}
+                  style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain", borderRadius: "8px" }}
                 />
               </Box>
 
-              <Typography
-                variant="h6"
-                color="#2e7d32"
-                align="center"
-                sx={{
-                  fontWeight: 500,
-                  mb: 2,
-                }}
-              >
+              <Typography variant="h6" color="#2e7d32" align="center" sx={{ fontWeight: 500, mb: 2 }}>
                 Empowering Sustainable Business
               </Typography>
 

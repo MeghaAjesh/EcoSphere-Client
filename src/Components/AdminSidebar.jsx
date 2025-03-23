@@ -131,7 +131,7 @@ function AdminSidebar() {
       
       <Box sx={{ mt: "auto", p: 2, borderTop: "1px solid rgba(255, 255, 255, 0.12)" }}>
         <Typography variant="caption" component="div" sx={{ opacity: 0.7 }}>
-          © 2025 Your Company
+          © 2025 EcoSphere
         </Typography>
       </Box>
     </Drawer>
